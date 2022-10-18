@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>DevStagram - @yield('titulo')</title>
         @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
     </head>
     <body class="bg-gray-100">
         <header class="p-5 border-b bg-white shadow">
@@ -13,7 +14,7 @@
 
                 <nav class="flex gap-2 items-center">
                     <a class="font-bold uppercase text-gray-600 text-sm" href="#">Login</a>
-                    <a class="font-bold uppercase text-gray-600 text-sm" href="#">Crear Cuenta</a>
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="/crear-cuenta">Crear Cuenta</a>
                 </nav>
             </div>
         </header>
@@ -23,7 +24,7 @@
             @yield('contenido')
         </main>
 
-        <footer class="text-center p-5 text-gray-500 font-bold uppercase">
+        <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
             DevStagram Todos los derechos reservados {{now()->year}}
         </footer>
     </body>

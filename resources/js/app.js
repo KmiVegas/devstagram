@@ -15,7 +15,9 @@ dropzone.on('sending', function(file,xhr,formData){
 });
 
 dropzone.on('success', function(file, response){
-    console.log(response);
+    console.log(response.imagen);
+    //asignar el nombre de la imagen al campo oculto en el formulario de crear posts
+    document.querySelector('[name="imagen"]').value = response.imagen;
 });
 
 dropzone.on('error', function(file, message){

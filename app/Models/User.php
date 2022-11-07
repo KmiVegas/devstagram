@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Post;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // método que le indica a Laravel la relación que existe entre los modelos
+    public function posts()
+    {
+        //relación one to many (uno es a muchos)
+        return $this->hasMany(Post::class);
+    }
+
+    /* public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    } */
 }

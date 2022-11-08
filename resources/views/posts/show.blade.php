@@ -20,6 +20,24 @@
                 </p>
                 <p class="mt-5"> {{ $post->descripcion }}</p>
             </div>
+
+            @auth()
+                @if ($post->user_id === auth()->user()->id)
+                    <form action="{{ route('posts.destroy', $post)}}" method="post">
+                        <!--
+                            metodo spoofing:
+                            permite agregar otro tipo de peticiones, ya que, los navegadores soportan get y post
+                        -->
+                        @method('DELETE')
+                        @csrf
+                        <input
+                            type="submit"
+                            value="Eliminar Publicación"
+                            class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer"
+                        >
+                    </form>
+                @endif
+            @endauth
         </div>
 
         <div class="md:w-1/2 p-5">
@@ -36,7 +54,7 @@
 
                     <form action="{{ route('comentarios.store', ['post' => $post, 'user' => $user ]) }}" method="POST">
                         @csrf
-                        <div>
+                        <div class="mb-5">
                             <label for="comentario" class="mb-2 block uppercase text-gray-500 font-bold">
                                 Añade un Comentario
                             </label>
@@ -60,6 +78,22 @@
                             uppercase font-bold w-full p-3 text-white rounded-lg">
                     </form>
                 @endauth
+
+                <div class="mb-5 bg-white shadow max-h-96 overflow-y-scroll mt-10">
+                    @if ($post->comentarios->count())
+                        @foreach ($post->comentarios as $comentario)
+                            <div class="p-5 border-gray-300 border-b">
+                                <a href="{{ route('posts.index', $comentario->user )}}" class="font-bold">
+                                    {{ $comentario->user->username }}
+                                </a>
+                                <p>{{ $comentario->comentario}}</p>
+                                <p class="text-gray-500 text-sm">{{ $comentario->created_at->diffForHumans() }}</p>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class="text-center p-10"> No hay Comentarios Aún</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

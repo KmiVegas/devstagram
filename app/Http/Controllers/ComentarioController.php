@@ -23,9 +23,5 @@ class ComentarioController extends Controller
         ]);
 
         return back()->with('mensaje', 'Comentario Realizado Correctamente');
-
-        /* $this->post()->comentarios()->create([
-            'comentario' => $request->comentario
-        ]); */
     }
 }

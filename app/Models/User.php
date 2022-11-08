@@ -49,9 +49,4 @@ class User extends Authenticatable
         //relación one to many (uno es a muchos)
         return $this->hasMany(Post::class);
     }
-
-    /* public function comentarios()
-    {
-        return $this->hasMany(Comentario::class);
-    } */
 }
